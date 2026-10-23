@@ -137,11 +137,11 @@ export const projects: Project[] = [
 
 export const skillGroups: SkillGroup[] = [
   { label: "Languages", items: ["Python", "Java", "TypeScript", "JavaScript", "SQL"] },
-  { label: "Backend", items: ["Spring Boot", "FastAPI", "Node.js", "REST APIs"] },
-  { label: "Frontend", items: ["React.js", "HTML5", "CSS3", "JavaScript"] },
+  { label: "Backend", items: ["Spring Boot", "FastAPI", "Node.js", "REST APIs", "UnitTest cases"] },
+  { label: "Frontend", items: ["React.js", "HTML5", "CSS3", "JavaScript", "TypeScript"] },
   { label: "Data", items: ["PostgreSQL", "MySQL", "Schema Design", "Query Optimization", "JSON"] },
-  { label: "Cloud & Tools", items: ["AWS S3", "Git", "CI/CD", "SonarQube", "Eclipse", "VS Code"] },
-  { label: "AI / ML", items: ["TensorFlow", "OpenCV", "Fast R-CNN", "Deep Learning"] },
+  { label: "Tools", items: ["Github", "CI/CD", "SonarQube", "Eclipse", "VS Code"," SoapUi"] },
+  { label: "AI / ML", items: ["OpenCV",  "Deep Learning"] },
   { label: "Other", items: ["Arduino", "Embedded C"] },
 ];
 

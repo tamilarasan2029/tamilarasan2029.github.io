@@ -4,7 +4,7 @@
 */
 
 :root {
-  --bg: #ffffff;
+  --bg: #cbb3e8;
   --lavender: #cbb3e8;
   --lavender-soft: #f1ebfb;
   --lavender-line: #e0d3f2;
@@ -14,7 +14,7 @@
   --ink: #1c1a22;
   --text-2: #3f3b48;
   --text-3: #6e6878;
-  --line: #e4dcf2;
+  --line: #a98fd0;
   --font-sans: "DM Sans Variable", "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --silk: cubic-bezier(0.16, 1, 0.3, 1);
   color-scheme: light;
@@ -109,7 +109,7 @@ button {
 
 .site-header.scrolled {
   padding: 14px 0;
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(203, 179, 232, 0.94);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 1px 0 var(--line);
@@ -989,7 +989,7 @@ a.contact-line:hover {
    ========================================================================== */
 
 .hero {
-  background: var(--lavender);
+  background: transparent;
 }
 
 .hero-intro,
@@ -1072,7 +1072,7 @@ a.contact-line:hover {
 }
 
 .timeline {
-  border-left-color: var(--lavender);
+  border-left-color: #8f73bd;
 }
 
 .timeline-dot {
@@ -1084,7 +1084,7 @@ a.contact-line:hover {
 }
 
 .filter-tab {
-  border-color: var(--lavender);
+  border-color: var(--ink);
   color: var(--ink);
 }
 
@@ -1124,7 +1124,7 @@ a.contact-line:hover {
 }
 
 .social-row a {
-  border-color: var(--lavender);
+  border-color: var(--ink);
   color: var(--ink);
 }
 
@@ -1155,8 +1155,8 @@ a.contact-line:hover {
 }
 
 .footer {
-  background: var(--lavender);
-  border-top-color: var(--lavender);
+  background: transparent;
+  border-top-color: #8f73bd;
   color: var(--ink);
 }
 
@@ -1181,5 +1181,158 @@ a.contact-line:hover {
 .skill-card,
 .cert-item,
 .project-card {
+  background: #ffffff;
+}
+
+/* ==========================================================================
+   Header logo (photo)
+   ========================================================================== */
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-logo {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 15%;
+  border: 2px solid #ffffff;
+  background: var(--lavender-soft);
+}
+
+.brand-text {
+  color: var(--ink);
+}
+
+.brand-text span {
+  color: var(--tomato);
+}
+
+/* ==========================================================================
+   Hero photo: clickable, opens the lightbox
+   ========================================================================== */
+
+.hero-photo-btn {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border-radius: 50%;
+  cursor: zoom-in;
+  transition: transform 0.4s var(--silk);
+}
+
+.hero-photo-btn:hover {
+  transform: scale(1.03);
+}
+
+.hero-photo-btn:focus-visible {
+  outline: 3px solid var(--tomato);
+  outline-offset: 4px;
+}
+
+/* ==========================================================================
+   Photo lightbox
+   ========================================================================== */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(20, 18, 26, 0.88);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  cursor: zoom-out;
+  animation: lightbox-in 0.3s var(--silk) both;
+}
+
+.lightbox-img {
+  max-width: min(92vw, 620px);
+  max-height: 86vh;
+  width: auto;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  cursor: default;
+  animation: lightbox-zoom 0.4s var(--silk) both, photo-bob 3.6s ease-in-out 0.4s infinite;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--ink);
+  transition: background 0.3s, color 0.3s;
+}
+
+.lightbox-close:hover {
+  background: var(--chartreuse);
+}
+
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lightbox-zoom {
+  from {
+    opacity: 0;
+    scale: 0.85;
+  }
+
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+/* Floating: the photo drifts up and down, and its shadow softens as it rises */
+@keyframes photo-bob {
+  0%,
+  100% {
+    translate: 0 0;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  }
+
+  50% {
+    translate: 0 -18px;
+    box-shadow: 0 46px 100px rgba(0, 0, 0, 0.38);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox-img {
+    animation: lightbox-zoom 0.4s var(--silk) both;
+  }
+}
+
+/* Full lavender page background; cards stay white for contrast */
+.cert-item,
+.about-points li {
+  background: transparent;
+}
+
+.cert-item {
   background: #ffffff;
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { FormEvent, ReactNode } from "react";
 import {
   ArrowRight,
@@ -119,7 +119,10 @@ function Header() {
     <header className={`site-header ${scrolled ? "scrolled" : ""}`}>
       <div className="header-inner">
         <a href="#top" className="brand">
-          Tamilarasan<span>.</span>
+          <img className="brand-logo" src="/logo.png" alt="" width={36} height={36} />
+          <span className="brand-text">
+            Tamilarasan<span>.</span>
+          </span>
         </a>
 
         <nav id="site-nav" className={`site-nav ${menuOpen ? "is-open" : ""}`} aria-label="Primary">
@@ -147,7 +150,7 @@ function Header() {
 
 /* ---------- Hero ---------- */
 
-function Hero() {
+function Hero({ onPhotoClick }: { onPhotoClick: () => void }) {
   return (
     <section id="top" className="hero">
       <div className="container hero-inner">
@@ -174,7 +177,14 @@ function Hero() {
         </div>
 
         <div className="hero-photo-wrap reveal reveal-delay-1">
-          <img className="hero-photo" src="/profile.jpg" alt="Portrait of Tamilarasan V" width={700} height={877} />
+          <button
+            type="button"
+            className="hero-photo-btn"
+            onClick={onPhotoClick}
+            aria-label="View photo larger"
+          >
+            <img className="hero-photo" src="/profile.jpg" alt="Portrait of Tamilarasan V" width={700} height={877} />
+          </button>
         </div>
       </div>
     </section>
@@ -472,6 +482,35 @@ function Contact() {
   );
 }
 
+/* ---------- Photo lightbox (click the hero photo to enlarge) ---------- */
+
+function PhotoLightbox({ open, onClose }: { open: boolean; onClose: () => void }) {
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div className="lightbox" role="dialog" aria-modal="true" aria-label="Photo of Tamilarasan V" onClick={onClose}>
+      <button type="button" className="lightbox-close" aria-label="Close photo" onClick={onClose}>
+        <X size={22} weight={ICON_WEIGHT} />
+      </button>
+      <img
+        className="lightbox-img"
+        src="/profile.jpg"
+        alt="Portrait of Tamilarasan V"
+        onClick={(event) => event.stopPropagation()}
+      />
+    </div>
+  );
+}
+
 /* ---------- Footer ---------- */
 
 function Footer() {
@@ -532,6 +571,8 @@ function useRevealOnScroll() {
 
 export default function App() {
   useRevealOnScroll();
+  const [photoOpen, setPhotoOpen] = useState(false);
+  const closePhoto = useCallback(() => setPhotoOpen(false), []);
 
   return (
     <>
@@ -540,7 +581,7 @@ export default function App() {
       </a>
       <Header />
       <main>
-        <Hero />
+        <Hero onPhotoClick={() => setPhotoOpen(true)} />
         <About />
         <Skills />
         <Experience />
@@ -549,6 +590,7 @@ export default function App() {
       </main>
       <Footer />
       <FloatingTop />
+      <PhotoLightbox open={photoOpen} onClose={closePhoto} />
     </>
   );
 }
