@@ -36,7 +36,7 @@ const navItems = [
   { href: "#contact", label: "Contact" },
 ];
 
-const typedWords = ["Software Engineer", "Full-Stack Developer", "Python · Java · TypeScript"];
+const typedWords = ["Full-Stack Software Engineer", "Python · Java · Spring Boot", "FastAPI · React · Node.js"];
 
 /* Gmail compose link: opens in the browser, no mail app needed */
 function gmailLink(to: string, subject = "", body = "") {
@@ -95,6 +95,17 @@ function Typewriter({ words }: { words: string[] }) {
 }
 
 /* ---------- Header ---------- */
+
+/* Animated background: soft drifting shapes in the existing palette */
+function AnimatedBackground() {
+  return (
+    <div className="bg-animated" aria-hidden="true">
+      <span className="blob blob-1" />
+      <span className="blob blob-2" />
+      <span className="blob blob-3" />
+    </div>
+  );
+}
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -579,6 +590,7 @@ export default function App() {
       <a className="skip-link" href="#about">
         Skip to content
       </a>
+      <AnimatedBackground />
       <Header />
       <main>
         <Hero onPhotoClick={() => setPhotoOpen(true)} />

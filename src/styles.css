@@ -1336,3 +1336,104 @@ a.contact-line:hover {
 .cert-item {
   background: #ffffff;
 }
+
+/* ==========================================================================
+   Animated background (palette colours only) and page layering
+   ========================================================================== */
+
+main,
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+.bg-animated {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.55;
+  will-change: transform;
+}
+
+.blob-1 {
+  width: 46vw;
+  height: 46vw;
+  min-width: 320px;
+  min-height: 320px;
+  top: -10%;
+  left: -8%;
+  background: var(--chartreuse);
+  opacity: 0.35;
+  animation: drift-1 22s ease-in-out infinite;
+}
+
+.blob-2 {
+  width: 40vw;
+  height: 40vw;
+  min-width: 280px;
+  min-height: 280px;
+  bottom: -12%;
+  right: -6%;
+  background: var(--tomato);
+  opacity: 0.22;
+  animation: drift-2 26s ease-in-out infinite;
+}
+
+.blob-3 {
+  width: 34vw;
+  height: 34vw;
+  min-width: 240px;
+  min-height: 240px;
+  top: 40%;
+  left: 45%;
+  background: #ffffff;
+  opacity: 0.25;
+  animation: drift-3 30s ease-in-out infinite;
+}
+
+@keyframes drift-1 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(12vw, 8vh) scale(1.12);
+  }
+}
+
+@keyframes drift-2 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(-10vw, -10vh) scale(0.92);
+  }
+}
+
+@keyframes drift-3 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(-14vw, 10vh);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob {
+    animation: none !important;
+  }
+}
